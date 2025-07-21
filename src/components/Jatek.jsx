@@ -115,7 +115,7 @@ function Jatek() {
                     successSound();
                     setJo(prev => prev + 1);
                 }
-            })
+            }).finally(() => setSubmitting(false))
     }
 
 
