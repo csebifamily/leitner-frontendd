@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f9fafb;
+  color: #2e2e2e;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0 20px 40px;
+}
+
+header {
+  text-align: center;
+  padding: 40px 10px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  z-index: 10;
+}
+
+header h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.progress {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.card {
+  background: white;
+  padding: 40px 30px;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.prompt {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.word {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 30px;
+  letter-spacing: 1.3px;
+}
+
+form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: 1.8px solid #d1d5db;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+}
+
+input[type="text"]:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.5);
+}
+
+button[type="submit"] {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.4);
+}
+
+button[type="submit"]:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 7px 18px rgba(29, 78, 216, 0.6);
+}
+
+.result-message {
+  margin-top: 28px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  min-height: 28px;
+  user-select: none;
+}
+
+.result-message.correct {
+  color: #22c55e;
+}
+
+.result-message.incorrect {
+  color: #ef4444;
+}
+
+/* Mobilbarát */
+@media (max-width: 480px) {
+  body {
+    padding: 0 15px 30px;
+  }
+
+  .card {
+    padding: 30px 20px;
+  }
+
+  .word {
+    font-size: 2.2rem;
+  }
+
+  form {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 14px 0;
+  }
+}
