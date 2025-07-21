@@ -21,8 +21,8 @@ function Gyakorlas() {
     const [inputValue, setInputValue] = useState("");
     const [jo, setJo] = useState(0);
     const [rossz, setRossz] = useState(0);
-
     const [index, setIndex] = useState(0);
+    const [submitting, setSubmitting] = useState(false);
 
     const navigate = useNavigate();
 
@@ -97,6 +97,7 @@ function Gyakorlas() {
 
     function gameSubmit(e) {
         e.preventDefault();
+        setSubmitting(true);
 
         const body = {
             _id: sorsoltSzo._id,
@@ -115,7 +116,7 @@ function Gyakorlas() {
                     successSound();
                     setJo(prev => prev + 1);
                 }
-            })
+            }).finally(() => setSubmitting(false))
     }
 
 
@@ -160,7 +161,7 @@ function Gyakorlas() {
             />
             <button
               type="submit"
-              disabled={showFeedback || theEnd ? true : false}
+              disabled={showFeedback || theEnd || submitting ? true : false}
               className="bg-blue-600 text-white font-bold text-lg rounded-2xl px-8 py-3 shadow-md hover:bg-blue-700 transition"
             >
               Ellenőrzés
