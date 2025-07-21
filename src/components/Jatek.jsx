@@ -21,8 +21,8 @@ function Jatek() {
     const [inputValue, setInputValue] = useState("");
     const [jo, setJo] = useState(0);
     const [rossz, setRossz] = useState(0);
-
     const [index, setIndex] = useState(0);
+    const [submitting, setSubmitting] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -95,6 +95,7 @@ function Jatek() {
 
     function gameSubmit(e) {
         e.preventDefault();
+        setSubmitting(true);
 
         const body = {
             _id: sorsoltSzo._id,
@@ -159,7 +160,7 @@ function Jatek() {
             />
             <button
               type="submit"
-              disabled={showFeedback || theEnd ? true : false}
+              disabled={showFeedback || theEnd || submitting ? true : false}
               className="bg-blue-600 text-white font-bold text-lg rounded-2xl px-8 py-3 shadow-md hover:bg-blue-700 transition"
             >
               Ellenőrzés
@@ -188,9 +189,17 @@ function Jatek() {
             {/* Szó felolvasása */}
             <button
                 onClick={() => {
-                    const utterance = new SpeechSynthesisUtterance(inputValue);
-                    utterance.lang = 'en-US' || 'en-GB'; // vagy 'en-GB'
-                    return speechSynthesis.speak(utterance);
+                    speechSynthesis.cancel();
+
+                    const utterance = new SpeechSynthesisUtterance(sorsoltSzo.translation);
+                    utterance.lang = 'en-US';
+
+                    const voices = speechSynthesis.getVoices();
+                    const voice = voices.find(v => v.lang === 'en-US' && v.name.includes('Samantha')); // vagy más angol hang iOS-en
+                    if (voice) utterance.voice = voice;
+
+                    speechSynthesis.speak(utterance);
+
                 }}
                 className="absolute top-4 right-4 text-gray-600 hover:text-blue-600 transition"
                 title="Hallgasd meg angolul"
