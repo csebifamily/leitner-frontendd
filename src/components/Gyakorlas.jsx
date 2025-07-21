@@ -190,9 +190,17 @@ function Gyakorlas() {
             {/* Szó felolvasása */}
             <button
                 onClick={() => {
-                    const utterance = new SpeechSynthesisUtterance(inputValue);
-                    utterance.lang = 'en-US'; // vagy 'en-GB'
-                    return speechSynthesis.speak(utterance);
+                    speechSynthesis.cancel();
+
+                    const utterance = new SpeechSynthesisUtterance(sorsoltSzo.translation);
+                    utterance.lang = 'en-US';
+
+                    const voices = speechSynthesis.getVoices();
+                    const voice = voices.find(v => v.lang === 'en-US' && v.name.includes('Samantha')); // vagy más angol hang iOS-en
+                    if (voice) utterance.voice = voice;
+
+                    speechSynthesis.speak(utterance);
+
                 }}
                 className="absolute top-4 right-4 text-gray-600 hover:text-blue-600 transition"
                 title="Hallgasd meg angolul"
