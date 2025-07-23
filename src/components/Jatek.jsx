@@ -8,7 +8,9 @@ import error from '../sounds/error.wav';
 import end from '../sounds/end.wav';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 
+
 function Jatek() {
+
 
     const [words, setWords] = useState([]);
     const [wordsLength, setWordsLength] = useState(0);
@@ -69,6 +71,7 @@ function Jatek() {
         }
     }, [index, words]);
 
+
     useEffect(() => {
         setPending(true);
         // Állapotok alaphelyzetbe hozása, amikor új gyakorlás kezdődik
@@ -84,7 +87,7 @@ function Jatek() {
         setInputValue("");
         hasStarted.current = false;
 
-        const body = { szint: "1" };
+        const body = { szint: location.state.level };
 
         sajatFetch.post(`${import.meta.env.VITE_API_URL}/api/jatek-szint-szavak`, body, { withCredentials: true })
             .then((res) => {
@@ -92,6 +95,7 @@ function Jatek() {
                 setPending(false);
             })
     }, [])
+
 
     function gameSubmit(e) {
         e.preventDefault();
@@ -186,7 +190,6 @@ function Jatek() {
                 )}
             </div>
 
-            {/* Szó felolvasása */}
             <button
                 onClick={() => {
                     speechSynthesis.cancel();
