@@ -193,8 +193,12 @@ function Jatek() {
             <button
                 onClick={() => {
                     speechSynthesis.cancel();
-
-                    const utterance = new SpeechSynthesisUtterance(sorsoltSzo.translation);
+                    let utterance = null;
+                    if(isCorrect) {
+                        utterance = new SpeechSynthesisUtterance(inputValue);
+                    } else {
+                        utterance = new SpeechSynthesisUtterance(sorsoltSzo.translation);
+                    }
                     utterance.lang = 'en-US';
 
                     const voices = speechSynthesis.getVoices();
